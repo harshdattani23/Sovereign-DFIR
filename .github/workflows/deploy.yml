@@ -25,7 +25,7 @@ jobs:
           service: apk-analyzer-service
           region: us-central1
           source: ./analyzer
-          flags: '--allow-unauthenticated'
+          flags: '--allow-unauthenticated --memory=2Gi'
           env_vars: |-
             GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
 
