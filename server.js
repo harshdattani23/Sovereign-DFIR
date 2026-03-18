@@ -4,9 +4,11 @@ const path = require('path');
 const { marked } = require('marked');
 const { Storage } = require('@google-cloud/storage');
 const crypto = require('crypto');
+const multer = require('multer');
 
 const app = express();
 app.use(express.json());
+const upload = multer({ storage: multer.memoryStorage() });
 const storage = new Storage();
 const bucketName = 'cybersentry-app-apks';
 const PORT = process.env.PORT || 3000;
@@ -185,22 +187,25 @@ const renderLesson = (contentHtml, title, currentModuleNum) => {
 `;
 };
 
-// Generate Signed URL for APK Upload
-app.get('/api/upload-url', async (req, res) => {
+// Direct Upload Endpoint via Multer to avoid IAM Signed URL local issues
+app.post('/api/upload', upload.single('apk'), async (req, res) => {
     try {
+        if (!req.file) {
+            return res.status(400).json({ error: 'No file uploaded' });
+        }
+        
         const fileId = crypto.randomBytes(16).toString('hex');
         const fileName = `${fileId}.apk`;
-        const options = {
-            version: 'v4',
-            action: 'write',
-            expires: Date.now() + 15 * 60 * 1000, // 15 mins
-            contentType: 'application/octet-stream',
-        };
-        const [url] = await storage.bucket(bucketName).file(fileName).getSignedUrl(options);
-        res.json({ url, fileId });
+        const blob = storage.bucket(bucketName).file(fileName);
+        
+        await blob.save(req.file.buffer, {
+            metadata: { contentType: 'application/octet-stream' }
+        });
+        
+        res.json({ fileId });
     } catch (e) {
-        console.error('Upload URL Error:', e);
-        res.status(500).json({ error: 'Failed to generate signed url' });
+        console.error('Direct Upload Error:', e);
+        res.status(500).json({ error: 'Failed to upload file to Cloud Storage: ' + e.message });
     }
 });
 
@@ -264,15 +269,18 @@ app.get('/analyzer', (req, res) => {
             resultContainer.style.display = 'none';
             
             try {
-                statusText.textContent = "Obtaining secure upload link...";
-                const { url, fileId } = await fetch('/api/upload-url').then(res => res.json());
+                statusText.textContent = "Uploading APK to backend (might take a minute)...";
+                const formData = new FormData();
+                formData.append('apk', file);
                 
-                statusText.textContent = "Uploading APK to Google Cloud Storage (might take a minute)...";
-                await fetch(url, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/octet-stream' },
-                    body: file
-                });
+                const { fileId, error } = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData
+                }).then(res => res.json());
+
+                if (error) {
+                    throw new Error(error);
+                }
                 
                 statusText.textContent = "Upload complete. Extracting APK and running Gemini Analysis...";
                 const res = await fetch('/api/analyze', {
