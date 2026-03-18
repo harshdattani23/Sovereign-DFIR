@@ -219,6 +219,12 @@ app.post('/api/analyze', async (req, res) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ fileId, bucket: bucketName })
         });
+        
+        if (!response.ok) {
+            console.error(`Analyzer backend returned HTTP error ${response.status}: ${response.statusText}`);
+            return res.status(response.status).json({ error: `Analyzer Engine failed or timed out: ${response.status} ${response.statusText}` });
+        }
+        
         const data = await response.json();
         res.json(data);
     } catch(e) {
