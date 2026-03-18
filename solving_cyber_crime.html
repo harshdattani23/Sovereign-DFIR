@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solving Cyber Crime Using AI - Comprehensive Masterclass</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0f;
+            --surface-color: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #f0f0f5;
+            --text-secondary: #9ba1b0;
+            --accent-cyan: #00f0ff;
+            --accent-purple: #8a2be2;
+            --accent-gradient: linear-gradient(135deg, #00f0ff 0%, #8a2be2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(138, 43, 226, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(0, 240, 255, 0.15), transparent 25%);
+            background-attachment: fixed;
+            padding-top: 60px; /* Offset for sticky nav */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Sticky Navigation Bar */
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .nav-pill {
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 1px solid transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-pill:hover, .nav-pill.active {
+            color: var(--accent-cyan);
+            border-color: rgba(0, 240, 255, 0.4);
+            background: rgba(0, 240, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: calc(100vh - 60px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.05)"/></svg>');
+            z-index: -1;
+        }
+
+        .tagline {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 50px;
+            color: var(--accent-cyan);
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: var(--accent-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            flex-wrap: wrap;
+        }
+
+        .glow-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            background: rgba(0, 240, 255, 0.1);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+
+        .glow-button:hover {
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
+            background: rgba(0, 240, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .glow-button.secondary {
+            border-color: var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            box-shadow: none;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Full Course Content Area */
+        .course-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Module Design */
+        .lesson-module {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem 4rem;
+            margin-bottom: 6rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            scroll-margin-top: 100px; /* Aligns smoothly under sticky nav */
+        }
+
+        .lesson-module::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-gradient);
+        }
+
+        .module-number {
+            font-size: 5rem;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            background: var(--accent-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.08;
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            line-height: 1;
+        }
+
+        .lesson-module h2 {
+            color: var(--accent-cyan);
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .lesson-module h3 {
+            color: #fff;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .lesson-module p {
+            color: var(--text-secondary);
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        .lesson-module ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        .lesson-module li {
+            margin-bottom: 0.8rem;
+        }
+
+        .lesson-module strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .lesson-module pre {
+            background: #111116;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            overflow-x: auto;
+            color: #00f0ff;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .alert-box {
+            background: rgba(138, 43, 226, 0.1);
+            border-left: 4px solid var(--accent-purple);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 2rem 0;
+        }
+
+        .alert-box h4 {
+            color: var(--accent-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Next / Prev Footer Action Buttons */
+        .module-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .module-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .module-action-btn:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+            transform: translateX(3px);
+        }
+
+        .module-action-btn.prev:hover {
+            transform: translateX(-3px);
+        }
+
+        .module-action-btn.primary {
+            background: rgba(138, 43, 226, 0.15);
+            border-color: var(--accent-purple);
+        }
+
+        .module-action-btn.primary:hover {
+            background: rgba(138, 43, 226, 0.3);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+        }
+
+        /* Terminal Integration */
+        .terminal-container {
+            margin-top: 4rem;
+            background: #111116;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            overflow: hidden;
+            position: relative;
+            z-index: 10;
+            scroll-margin-top: 100px;
+        }
+
+        .terminal-header {
+            background: #1a1a24;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mac-btns { display: flex; gap: 8px; }
+        .mac-btn { width: 12px; height: 12px; border-radius: 50%; }
+        .mac-btn.close { background: #ff5f56; }
+        .mac-btn.minimize { background: #ffbd2e; }
+        .mac-btn.maximize { background: #27c93f; }
+
+        .terminal-title {
+            margin-left: auto;
+            margin-right: auto;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .terminal-body {
+            padding: 2rem;
+            font-family: 'Courier New', Courier, monospace;
+            color: #00f0ff;
+            min-height: 250px;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .typewriter-text {
+            overflow: hidden;
+            white-space: pre-wrap;
+            border-right: 2px solid var(--accent-cyan);
+            width: 0;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent-cyan) }
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .lesson-module { padding: 2rem; }
+            .sticky-nav { padding: 0.5rem; gap: 0.5rem; }
+            .nav-pill { padding: 0.4rem 1rem; font-size: 0.85rem; }
+            .module-action-btn { width: 100%; justify-content: center; margin-bottom: 1rem; }
+            .module-footer { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Native Navigation Menu -->
+    <nav class="sticky-nav">
+        <a href="#module-1" class="nav-pill" onclick="setActiveNav(this)">Module 1</a>
+        <a href="#module-2" class="nav-pill" onclick="setActiveNav(this)">Module 2</a>
+        <a href="#module-3" class="nav-pill" onclick="setActiveNav(this)">Module 3</a>
+        <a href="#module-4" class="nav-pill" onclick="setActiveNav(this)">Module 4</a>
+        <a href="#module-5" class="nav-pill" onclick="setActiveNav(this)">Module 5</a>
+    </nav>
+
+    <section class="hero">
+        <div class="tagline">Comprehensive Masterclass</div>
+        <h1>Solving Cyber Crime<br>Using AI</h1>
+        <p>Master the tools of the future. Harness Large Language Models to detect anomalies, analyze malicious code, and accelerate incident response at machine speed.</p>
+        
+        <div class="button-group">
+            <a href="#module-1" class="glow-button" onclick="setActiveNav(document.querySelector('.nav-pill'))">Start the Course ➔</a>
+        </div>
+    </section>
+
+    <div class="course-container">
+        <!-- MODULE 1 -->
+        <div class="lesson-module" id="module-1">
+            <div class="module-number">01</div>
+            <h2>Module 1: Introduction to AI and Large Language Models</h2>
+            <p>Welcome to the foundation of the Advanced Cyber AI Course. Threat actors are already leveraging AI to automate attacks, write polymorphic malware, and scale social engineering. To defend against them, you must understand exactly how these systems function beneath the hood.</p>
+            
+            <h3>1. Deconstructing Artificial Intelligence</h3>
+            <ul>
+                <li><strong>Machine Learning (ML):</strong> Instead of writing explicit <code>if-then</code> rules, we feed an algorithm thousands of examples (e.g., malware hashes vs. benign software). The system builds a mathematical model capable of classifying unseen files.</li>
+                <li><strong>Deep Learning (DL):</strong> A subfield of ML using <strong>Artificial Neural Networks (ANNs)</strong> with many layers. DL is what allows AI to process unstructured data like images, audio, and raw network pcap files.</li>
+            </ul>
+
+            <h3>2. How LLMs Process Data</h3>
+            <p>LLMs do not understand English. They understand mathematics via the Token-Vector pipeline.</p>
+            <ul>
+                <li><strong>Tokenization:</strong> When you type a prompt, the LLM chops the string into <strong>tokens</strong> (roughly 4 characters). Highly obfuscated malicious code results in massive token counts because it breaks standard linguistic bounds.</li>
+                <li><strong>Context Windows:</strong> The maximum amount of text the model can "remember" in a single active chat. A 1M context window can ingest an entire codebase instantly.</li>
+                <li><strong>Transformers:</strong> The underlying architecture (the "T" in ChatGPT) uses <em>Self-Attention Mechanisms</em> to weigh the importance of different words, allowing it to understand that a port scan on log line 5 connects to an execution attempt on line 50.</li>
+            </ul>
+
+            <h3>3. Advanced Prompt Engineering</h3>
+            <p>In cybersecurity, vague prompts lead to hallucinations. Precision is key.</p>
+            <ul>
+                <li><strong>Role-Playing:</strong> <em>"Act as an elite reverse engineer specializing in APT group techniques..."</em></li>
+                <li><strong>Few-Shot Prompting:</strong> Give the AI examples of what good analysis looks like before asking it to do the work.</li>
+                <li><strong>Chain-of-Thought (CoT):</strong> Force the AI to "show its work." This prevents logic jumps when analyzing complex attack chains. (<em>"Trace the execution flow. Think step-by-step."</em>)</li>
+            </ul>
+
+            <!-- Module Navigation Buttons -->
+            <div class="module-footer">
+                <div></div> <!-- Empty div for flex spacing -->
+                <a href="#module-2" class="module-action-btn primary" onclick="updateActiveNav(1)">Next: The AI Landscape ➔</a>
+            </div>
+        </div>
+
+        <!-- MODULE 2 -->
+        <div class="lesson-module" id="module-2">
+            <div class="module-number">02</div>
+            <h2>Module 2: The Evolving Landscape of AI Models</h2>
+            <p>The cybersecurity landscape requires you to choose the exact right weapon for the attack surface. Sending your company's proprietary SOC logs to a public web chat is a fast track to a massive data breach. Understanding model deployments is critical.</p>
+
+            <h3>1. Foundational vs. Fine-Tuned Models</h3>
+            <p><strong>Foundational Models:</strong> Models like GPT-4 or Claude 3.5 Sonnet are trained on essentially the entire public internet. They are extremely capable, generalized "jack-of-all-trades" systems.</p>
+            <p><strong>Fine-Tuned Models:</strong> These are foundational models that underwent secondary training explicitly on niche datasets (e.g., trained continuously on 10,000 Android Malware samples). They specialize in specific domain logic.</p>
+
+            <h3>2. Proprietary Ecosystems</h3>
+            <ul>
+                <li><strong>OpenAI (GPT-4o):</strong> The industry standard for complex logic reasoning and Python/C++ generation.</li>
+                <li><strong>Google (Gemini 1.5 Pro):</strong> Features a massive 1-million-to-2-million token context window. You can upload an entire book of firewall logs and ask Gemini to pinpoint the exact moment an attacker breached the network.</li>
+                <li><strong>Anthropic (Claude 3 Opus):</strong> Renowned for its extreme steerability, low hallucination rate, and refusal to be easily jailbroken.</li>
+            </ul>
+
+            <h3>3. The Open-Source Revolution (DFIR Safe)</h3>
+            <p>These models can be downloaded for free and run <strong>locally</strong> on your own hardware completely disconnected from the internet. This is non-negotiable for digital forensics (DFIR) dealing with live malware data.</p>
+            <ul>
+                <li><strong>Meta (Llama 3):</strong> The workhorse of open-source, available in various size parameters (8B, 70B).</li>
+                <li><strong>Ollama Ecosystem:</strong> A tool that allows you to easily run these open-source models natively on your laptop using quantized GGUF formats, requiring significantly less Memory/VRAM.</li>
+            </ul>
+
+            <h3>4. Spotlight on Sarvam AI</h3>
+            <p>Threat actors operate globally. When an attacker communicates in Hindi, Tamil, or Bengali, standard Western models drop significantly in accuracy.</p>
+            <p><strong>Sarvam AI</strong> is India’s foremost startup dedicated to building full-stack foundational AI. They build foundational models (like <strong>OpenHathi</strong>) that natively tokenize and understand Indic languages. Leveraging Sarvam models allows incident response teams to rapidly parse localized phishing lures and dark-web negotiations in regional dialects.</p>
+            
+            <!-- Module Navigation Buttons -->
+            <div class="module-footer">
+                <a href="#module-1" class="module-action-btn prev" onclick="updateActiveNav(0)">⬅ Previous Module</a>
+                <a href="#module-3" class="module-action-btn primary" onclick="updateActiveNav(2)">Next: AI Tools & OSINT ➔</a>
+            </div>
+        </div>
+
+        <!-- MODULE 3 -->
+        <div class="lesson-module" id="module-3">
+            <div class="module-number">03</div>
+            <h2>Module 3: Specialized AI Tools & OSINT</h2>
+            <p>The era of basic chatbot queries is over. Security analysts now utilize highly specialized interfaces wrapped around foundational models to conduct rapid, complex operations.</p>
+
+            <h3>1. Grounded Analysis with Google NotebookLM</h3>
+            <p>NotebookLM flips the paradigm: instead of asking the AI about its training data, you give it <em>your</em> data, and force it to be an expert solely on what you provided.</p>
+            <ul>
+                <li><strong>The Hallucination Cure:</strong> When investigating a niche APT, NotebookLM creates an isolated knowledge graph from your uploaded PDFs, SOC reports, and malware whitepapers. If the answer isn't in your document, it won't answer.</li>
+                <li><strong>Audio Overviews:</strong> A groundbreaking feature that digests hundreds of pages of technical threat intel and generates an ultra-realistic, multi-speaker podcast summary.</li>
+            </ul>
+
+            <h3>2. API Automation & Gemini Gems</h3>
+            <p>Repetition is the enemy of incident response. <strong>Gemini Gems</strong> allow you to wrap a persistent system prompt, specific rules of engagement, and persona instructions into a reusable module.</p>
+            <p><strong>Building a "Phishing Analyst" Gem:</strong> Instead of pasting a giant pre-prompt every time, you build a Gem with frozen instructions: <em>"You are a Level-3 SOC Analyst. When given email source code, extract 'Received' hops sequentially. Validate SPF/DKIM/DMARC status. Evaluate URLs for Homograph attacks."</em></p>
+
+            <h3>3. Real-Time OSINT with Grok (by xAI)</h3>
+            <p>Open Source Intelligence (OSINT) relies on fresh data. A threat actor breaching a company today will be talking about it on X (Twitter) right now.</p>
+            <ul>
+                <li><strong>The Data Lake Advantage:</strong> While standard models have a "knowledge cutoff", Grok is directly plugged into the real-time X firehose.</li>
+                <li><strong>Social Profiling:</strong> When a new CVE hits, InfoSec Twitter explodes with Proof-of-Concept code hours or days before official vendor patches. You can instruct Grok: <em>"Summarize the current InfoSec discussion regarding CVE-2026-XXXX and extract working mitigation rules researchers have tweeted in the last 6 hours."</em></li>
+            </ul>
+
+            <!-- Module Navigation Buttons -->
+            <div class="module-footer">
+                <a href="#module-2" class="module-action-btn prev" onclick="updateActiveNav(1)">⬅ Previous Module</a>
+                <a href="#module-4" class="module-action-btn primary" onclick="updateActiveNav(3)">Next: Mobile APK Analysis ➔</a>
+            </div>
+        </div>
+
+        <!-- MODULE 4 -->
+        <div class="lesson-module" id="module-4">
+            <div class="module-number">04</div>
+            <h2>Module 4: AI in Cybersecurity - Mobile APK Analysis</h2>
+            <p>Mobile devices are the central hub of an organization's authentication infrastructure. Consequently, malware authors are heavily targeting Android environments. Traditional Reverse Engineering is notoriously slow. Let's supercharge it with AI.</p>
+
+            <h3>1. The Teardown: Reversing the APK</h3>
+            <p>An APK is just a glorified ZIP file, but extracting the logic requires specialized CLI tools.</p>
+            <pre><code># Standard extraction and decompilation via APKTool
+apktool d malicious_payload.apk -o /output_directory/
+</code></pre>
+            <p>We use tools like <strong>JADX</strong> and <strong>JD-GUI</strong> to decompile the Android bytecode back into highly readable Java classes. Once extracted, we introduce the LLM.</p>
+
+            <h3>2. Manifest Attack Surface Mapping</h3>
+            <p>The <code>AndroidManifest.xml</code> dictates exactly what an app is legally allowed to do.</p>
+            <ul>
+                <li><strong>The Prompt:</strong> Feed the XML directly into a large-context model like Gemini 1.5. <em>"Analyze this AndroidManifest. The app claims to be a generic flashlight. Flag any permissions that violently misalign with its purpose."</em></li>
+                <li><strong>The Output:</strong> The AI instantly highlights <code>BIND_DEVICE_ADMIN</code> (total control) or <code>READ_SMS</code> (intercepting 2FA OTP codes).</li>
+            </ul>
+
+            <h3>3. Deobfuscation & Secret Hunting</h3>
+            <p>Malware authors use ProGuard to strip variable names down to meaningless letters (e.g., <code>a.b()</code>).</p>
+            <p><strong>Deobfuscation:</strong> AI is incredibly gifted at inferring what scrambled variable names actually represent based on how they interact with built-in Android network functions. Ask the model to rewrite the code into commented pseudo-code.</p>
+
+            <!-- Module Navigation Buttons -->
+            <div class="module-footer">
+                <a href="#module-3" class="module-action-btn prev" onclick="updateActiveNav(2)">⬅ Previous Module</a>
+                <a href="#module-5" class="module-action-btn primary" onclick="updateActiveNav(4)">Next: Custom Deployed Solutions ➔</a>
+            </div>
+        </div>
+
+        <!-- MODULE 5 -->
+        <div class="lesson-module" id="module-5">
+            <div class="module-number">05</div>
+            <h2>Module 5: Exploring Custom Deployed AI Solutions</h2>
+            <p>Relying on public chat interfaces isn't enough for enterprise security. The ultimate endgame for a Security Operations Center (SOC) is building its own customized, isolated architecture.</p>
+
+            <h3>1. The Engine of Enterprise: RAG Contexts</h3>
+            <p>Why doesn't a bank just use standard ChatGPT? Because standard models have no idea what "Server-X12" means. We fix this with <strong>Retrieval-Augmented Generation (RAG)</strong>.</p>
+            <ul>
+                <li><strong>Vectorization:</strong> You take internal company data and use an Embedding Model to turn text into mathematical vectors stored in DBs like Pinecone.</li>
+                <li><strong>The Context Injection:</strong> An analyst asks, <em>"How do I quarantine a host on AWS?"</em> The system searches the Vector Database, finds the official company AWS IR Policy PDF, and silently prepends that document into the LLM prompt. The LLM then answers securely and contextually based <strong>only</strong> on that private data.</li>
+            </ul>
+
+            <h3>2. Practical Lab Integration: Thana GPT</h3>
+            <p>Building these systems requires moving from local scripts to deployed infrastructure using environments like Google Cloud Run.</p>
+            <p><strong>Thana GPT</strong> is our prime example of a custom-deployed AI assistant designed to handle security operations and threat landscaping efficiently.</p>
+            <ul>
+                <li><strong>Action item:</strong> Explore the live deployment here: <a href="https://cybersentry-687004561094.us-central1.run.app" target="_blank" style="color: var(--accent-cyan);">Thana GPT Dashboard</a></li>
+                <li><strong>Observation:</strong> Note how a dedicated UI removes the "blank canvas" fear of a standard LLM chat box, guiding the analyst specifically toward cyber-relevant tasks within a secure container.</li>
+            </ul>
+
+            <!-- Module Navigation Buttons -->
+            <div class="module-footer">
+                <a href="#module-4" class="module-action-btn prev" onclick="updateActiveNav(3)">⬅ Previous Module</a>
+                <a href="#terminal-container" class="module-action-btn primary" onclick="updateActiveNav(-1)">View Final Terminal Lab ➔</a>
+            </div>
+        </div>
+        
+        <div class="terminal-container" id="terminal-container">
+            <div class="terminal-header">
+                <div class="mac-btns">
+                    <div class="mac-btn close"></div>
+                    <div class="mac-btn minimize"></div>
+                    <div class="mac-btn maximize"></div>
+                </div>
+                <div class="terminal-title">ai-agent@cybersentry:~</div>
+            </div>
+            <div class="terminal-body" id="terminal-content">
+                // Lab Environment Initializing...<br>
+                > Loading Threat Models... [OK]<br>
+                > Connecting to Global OSINT Feeds... [OK]<br>
+                > Standby for user input.<br><br>
+                <span style="color: #fff;">$ analyze payload.apk --deep-scan</span><br><br>
+                <div class="typewriter-text" id="typewriter"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Advanced Cyber AI Course. Built for next-generation security professionals.</p>
+    </footer>
+
+    <script>
+        // Set Active State for Nav Pills
+        const navPills = document.querySelectorAll('.nav-pill');
+        
+        function setActiveNav(element) {
+            navPills.forEach(pill => pill.classList.remove('active'));
+            if(element) element.classList.add('active');
+        }
+
+        function updateActiveNav(index) {
+            if(index >= 0 && index < navPills.length) {
+                setActiveNav(navPills[index]);
+            } else {
+                navPills.forEach(pill => pill.classList.remove('active'));
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const typewriterObj = document.getElementById('typewriter');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        typewriterObj.innerHTML = "Tracing API calls...\n[ALERT] Hardcoded AWS Credentials found at 0x4F12A.\n[WARNING] Suspicious network request to ru-cdn-malicious.xyz block detected.\n>> Generating mitigation playbook...";
+                        typewriterObj.style.animation = "typing 3.5s steps(40, end) forwards, blink 0.75s step-end infinite";
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(document.querySelector('.terminal-container'));
+        });
+    </script>
+</body>
+</html>
