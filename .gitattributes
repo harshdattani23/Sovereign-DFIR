@@ -1,0 +1,9 @@
+# Prevent GitHub from incorrectly categorizing the repository as an HTML project by ignoring frontend library boilerplate
+public/index.html linguist-generated=true
+public/i18n.js linguist-generated=true
+content/* linguist-generated=true
+
+# Explicitly force GitHub to recognize the proprietary backend logic as Javascript
+*.js linguist-detectable=true
+*.json linguist-detectable=true
+*.md linguist-detectable=true
