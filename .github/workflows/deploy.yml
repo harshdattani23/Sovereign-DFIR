@@ -25,7 +25,7 @@ jobs:
           service: apk-analyzer-service
           region: us-central1
           source: ./analyzer
-          flags: '--allow-unauthenticated --memory=2Gi'
+          flags: '--allow-unauthenticated --memory=8Gi --cpu=2 --timeout=600'
           env_vars: |-
             GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
 
@@ -38,7 +38,7 @@ jobs:
           source: ./
           env_vars: |-
             ANALYZER_URL=${{ steps.deploy-analyzer.outputs.url }}/analyze
-          flags: '--allow-unauthenticated'
+          flags: '--allow-unauthenticated --timeout=600'
 
       - name: Show Output URL
         run: |
